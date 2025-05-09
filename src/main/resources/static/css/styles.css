@@ -1236,6 +1236,10 @@ textarea.form-control {
     gap: 20px;
 }
 
+.checkout-btn a {
+    text-decoration: none;
+}
+
 /* Responsive layout adjustments */
 @media (max-width: 992px) {
     .dashboard-flex-container {
