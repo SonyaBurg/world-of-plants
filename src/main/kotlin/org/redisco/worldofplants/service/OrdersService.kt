@@ -1,5 +1,6 @@
 package org.redisco.worldofplants.service
 
+import org.redisco.worldofplants.dtos.GeneralStatistics
 import org.redisco.worldofplants.dtos.MonthlyRevenue
 import org.redisco.worldofplants.dtos.Order
 import org.redisco.worldofplants.dtos.OrderStatusStatistics
@@ -23,6 +24,7 @@ interface OrdersService {
     fun getOrderDetails(orderNumber: Int): Order
     fun countOrdersByStatus(): OrderStatusStatistics
     fun getMonthlyRevenue(): MonthlyRevenue
+    fun getGeneralStatistics(): GeneralStatistics
 }
 
 @Service
@@ -105,5 +107,19 @@ class OrdersServiceImpl(
             revenue.add(total / 100)
         }
         return MonthlyRevenue(months, revenue)
+    }
+
+    @Transactional(readOnly = true)
+    override fun getGeneralStatistics(): GeneralStatistics {
+        val totalOrders = ordersRepository.count()
+        val totalRevenue = ordersRepository.findTotalRevenue()
+        val totalUsers = userRepository.count()
+        val totalPlantSold = ordersRepository.findTotalPlantsSold()
+        return GeneralStatistics(
+            totalRevenue = totalRevenue / 100,
+            totalUsers = totalUsers,
+            totalOrders = totalOrders,
+            totalPlantSold = totalPlantSold
+        )
     }
 }

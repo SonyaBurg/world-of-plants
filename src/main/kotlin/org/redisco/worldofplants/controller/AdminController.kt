@@ -143,10 +143,10 @@ class AdminController(
     fun dashboard(model: Model): String {
         val orderStatusStatistics = ordersService.countOrdersByStatus()
         val monthlyRevenueData = ordersService.getMonthlyRevenue()
-//        val generalStatistics = ordersService.getGeneralStatistics()
+        val generalStatistics = ordersService.getGeneralStatistics()
         model.addAttribute("orderStatistics", orderStatusStatistics)
         model.addAttribute("monthlyRevenue", monthlyRevenueData)
-
+        model.addAttribute("generalStatistics", generalStatistics)
         return "admin/dashboard"
     }
 

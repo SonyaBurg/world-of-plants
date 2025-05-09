@@ -69,20 +69,20 @@
                 <h2>Recent Activity</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value" th:text="${totalOrders ?: 0}">0</div>
+                        <div class="stat-value" th:text="${generalStatistics.totalOrders ?: 0}">0</div>
                         <div class="stat-label">Total Orders</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" th:text="${totalRevenue != null ? '$' + totalRevenue : '$0'}">$0</div>
+                        <div class="stat-value" th:text="${generalStatistics.totalRevenue != null ? '$' + generalStatistics.totalRevenue : '$0'}">$0</div>
                         <div class="stat-label">Revenue</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" th:text="${totalUsers ?: 0}">0</div>
+                        <div class="stat-value" th:text="${generalStatistics.totalUsers ?: 0}">0</div>
                         <div class="stat-label">Users</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" th:text="${totalPlants ?: 0}">0</div>
-                        <div class="stat-label">Plants</div>
+                        <div class="stat-value" th:text="${generalStatistics.totalPlantSold ?: 0}">0</div>
+                        <div class="stat-label">Plants Sold</div>
                     </div>
                 </div>
             </div>
