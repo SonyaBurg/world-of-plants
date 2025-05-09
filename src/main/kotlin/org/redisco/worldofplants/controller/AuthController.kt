@@ -26,7 +26,7 @@ class AuthController(
     fun registerUser(@ModelAttribute registerRequest: RegisterRequest): String {
         return try {
             userService.registerUser(registerRequest)
-            "redirect:/login?registered"
+            "redirect:/login"
         } catch (_: IllegalArgumentException) {
             "redirect:/register?error"
         }
