@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shopping Cart - World of Plants</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="top-nav">
+    <div class="nav-left">
+        <div class="logo">WORLD OF PLANTS</div>
+    </div>
+    <div class="nav-right">
+        <a href="/" class="home">HOME</a>
+        <a href="/plants" class="search">SEARCH</a>
+        <a href="/account" class="account">ACCOUNT</a>
+        <a href="/basket" class="cart-icon">CART</a>
+        <a href="/orders" class="cart-icon">ORDERS</a>
+    </div>
+</nav>
+
+<section class="cart-header">
+    <h1>Your Shopping Cart</h1>
+    <p class="cart-count" th:text="${'Items in cart: ' + cart.items.size()}">Items in cart: 0</p>
+</section>
+
+<main class="cart-container">
+    <div class="cart-items">
+        <div th:if="${cart.items.isEmpty()}" class="empty-orders">
+            <p>Your basket is empty</p>
+            <a href="/plants" class="continue-shopping">Start Shopping</a>
+        </div>
+        <div th:if="${!cart.items.isEmpty()}" th:each="item : ${cart.items}" class="cart-item">
+            <div class="item-image">
+                <img th:src="@{${item.plant.pictureLink}}" alt="Plant">
+            </div>
+            <div class="item-details">
+                <h3 th:text="${item.plant.name}">Plant Name</h3>
+                <p class="item-description" th:text="${item.plant.description}">Description</p>
+            </div>
+            <div class="item-quantity">
+                <button class="quantity-btn">-</button>
+                <input type="number" th:value="${item.quantity}" min="1" class="quantity-input">
+                <button class="quantity-btn">+</button>
+            </div>
+            <div class="item-price" th:text="${'$' + item.plant.price/100}">$15.00</div>
+            <button class="remove-item">×</button>
+        </div>
+    </div>
+
+    <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span th:text="${'$' + cart.subTotalPrice/100}">$0.00</span>
+        </div>
+        <div class="summary-row">
+            <span>Shipping</span>
+            <span th:text="${'$' + cart.shippingPrice/100}">$0.00</span>
+        </div>
+        <div class="summary-row total">
+            <span>Total</span>
+            <span th:text="${'$' + cart.totalPrice/100}">$0.00</span>
+        </div>
+        <form th:action="@{/orders}" method="post">
+        <button class="checkout-btn">Proceed to Checkout</button>
+        </form>
+        <a href="/plants" class="continue-shopping">Continue Shopping</a>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>World of Plants</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-left">
+        <div class="logo">WORLD OF PLANTS</div>
+    </div>
+    <div class="nav-right">
+        <a href="/" class="home">HOME</a>
+        <a href="/plants" class="search">SEARCH</a>
+        <a href="account" class="account">ACCOUNT</a>
+        <a href="/basket" class="cart-icon">CART</a>
+        <a href="/orders" class="cart-icon">ORDERS</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="brand">WORLD OF PLANTS</div>
+        <h1 class="product-title">Discover Nature's Finest</h1>
+        <p class="product-description">
+            Explore our carefully curated collection of beautiful plants, perfect for bringing life and natural elegance to your space.
+        </p>
+        <a th:href="@{/plants}" class="cta-button" style="text-decoration: none;">See Collection</a>
+    </div>
+    <div class="hero-image">
+        <img height="350" width="450" src="https://cdn.shopify.com/s/files/1/1552/7691/files/2-pack-glass-flower-vases-heavy-duty-cylinder-design-28-clear-durable-centerpieces-for-events.jpg?v=1738752149&width=1000&crop=center" alt="Featured Plant" />
+    </div>
+</section>
+
+<div class="category-nav">
+    <a class="category-item" href="/plants">
+        <span>All</span>
+    </a>
+    <a class="category-item" href="/plants?category=Flowers">
+        <span>Flowers</span>
+    </a>
+    <a class="category-item" href="/plants?category=Herbs">
+        <span>Herbs</span>
+    </a>
+    <a class="category-item" href="/plants?category=Indoor%20Plants">
+        <span>Indoor plants</span>
+    </a>
+    <a class="category-item" href="/plants?category=Succulents">
+        <span>Succulents</span>
+    </a>
+    <a class="category-item" href="/plants?category=Vegetables">
+        <span>Vegetables</span>
+    </a>
+</div>
+
+<section class="news-section">
+    <h2 class="news-title">Our Latest News</h2>
+    <div class="news-grid">
+        <div class="news-card">
+            <div class="news-image"></div>
+            <div class="news-content">
+                <h3 class="news-card-title">The Original is Back!</h3>
+                <p class="news-card-text">
+                    70 years since its introduction. Buy our iconic Fritz Hansen Original Chair in limited edition.
+                </p>
+            </div>
+        </div>
+        <div class="news-card">
+            <div class="news-image"></div>
+            <div class="news-content">
+                <h3 class="news-card-title">Quick Sale: 25% off!</h3>
+                <p class="news-card-text">
+                    Now a shopping 25% discount on the entire Radish collection! So don't wait to save big today.
+                </p>
+            </div>
+        </div>
+        <div class="news-card">
+            <div class="news-image"></div>
+            <div class="news-content">
+                <h3 class="news-card-title">Design Deals</h3>
+                <p class="news-card-text">
+                    This week the Spectrum Premium Chair is one of our weekly deals. Get 15% off all colors.
+                </p>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <div class="slider-arrow">←</div>
+            <div class="slider-arrow">→</div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shop Plants - World of Plants</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="top-nav">
+    <div class="nav-left">
+        <div class="logo">WORLD OF PLANTS</div>
+    </div>
+    <div class="nav-right">
+        <a href="/" class="home">HOME</a>
+        <a href="/plants" class="search">SEARCH</a>
+        <a href="/account" class="account">ACCOUNT</a>
+        <a href="/basket" class="cart-icon">CART</a>
+        <a href="/orders" class="cart-icon">ORDERS</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Our Plants Collection</h1>
+<!--    <p>Find your perfect green companion</p>-->
+</section>
+
+<nav class="category-nav">
+    <a href="/plants" class="category-item" th:classappend="${selectedCategory == null ? 'active' : ''}">
+        All Plants
+    </a>
+    <a th:each="category : ${categories}"
+       th:href="@{/plants(category=${category})}"
+       class="category-item"
+       th:classappend="${category == selectedCategory ? 'active' : ''}"
+       th:text="${category}">
+    </a>
+</nav>
+
+
+<main class="plants-container">
+    <div class="plants-grid">
+        <div th:each="plant : ${plants}" class="plant-card">
+            <img th:src="@{${plant.pictureLink}}" alt="Plant" class="plant-image">
+            <div class="plant-info">
+                <h3 class="plant-name" th:text="${plant.name}">Plant Name</h3>
+                <p class="plant-description" th:text="${plant.description}">Description</p>
+                <p class="plant-price" th:text="${'$' + plant.price/100}">$15.00</p>
+                <div class="add-to-cart-section">
+                    <form th:action="@{/plants}" method="post">
+                        <input type="hidden" name="plantName" th:value="${plant.name}">
+                        <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="99">
+                    <button class="btn add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Plants Catalog - World of Plants</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Our Plants</h1>-->
+
+<!--<div class="plants-grid">-->
+<!--    <div th:each="plant : ${plants}" class="plant-card">-->
+<!--        <h3 th:text="${plant.name}">Plant Name</h3>-->
+<!--        <p th:text="${plant.description}">Description</p>-->
+<!--        <p class="price" th:text="${'$' + plant.price/100}">Price</p>-->
+<!--        <a th:href="@{/plants/{id}(id=${plant.name})}" class="button">View Details</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

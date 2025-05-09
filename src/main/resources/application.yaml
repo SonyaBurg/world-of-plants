@@ -1,0 +1,15 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: postgres
+    web:
+      resources:
+          static-locations: classpath:/static/
+
+app:
+    admin:
+        username: admin
+        password: admin
+        email: admin@worldofplants.com
+

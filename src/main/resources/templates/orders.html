@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Your Orders - World of Plants</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-left">
+    <div class="logo">WORLD OF PLANTS</div>
+  </div>
+  <div class="nav-right">
+    <a href="/" class="home">HOME</a>
+    <a href="/plants" class="search">SEARCH</a>
+    <a href="/account" class="account">ACCOUNT</a>
+    <a href="/basket" class="cart-icon">CART</a>
+    <a href="/orders" class="cart-icon">ORDERS</a>
+  </div>
+</nav>
+
+<section class="cart-header">
+  <h1>Your Orders</h1>
+  <p class="cart-count" th:text="${'Total orders: ' + orders.size()}">Total orders: 0</p>
+</section>
+
+<main class="cart-container">
+  <div class="cart-items">
+    <div th:if="${orders.isEmpty()}" class="empty-orders">
+      <p>You haven't placed any orders yet.</p>
+      <a href="/plants" class="continue-shopping">Start Shopping</a>
+    </div>
+
+    <div th:if="${!orders.isEmpty()}" th:each="order : ${orders}" class="order-item">
+      <div class="order-header">
+        <div class="order-info">
+          <span class="order-date" th:text="${order.date}">May 15, 2024</span>
+<!--          <span class="order-number" th:text="${'Order #' + order.id}">Order #12345</span>-->
+        </div>
+        <div class="order-status" th:text="${order.status}">Processing</div>
+      </div>
+
+      <div th:each="item : ${order.items}" class="cart-item">
+        <div class="item-image">
+          <img th:src="@{${item.plant.pictureLink}}" alt="Plant">
+        </div>
+        <div class="item-details">
+          <h3 th:text="${item.plant.name}">Plant Name</h3>
+          <p class="item-description" th:text="${item.plant.description}">Description</p>
+        </div>
+        <div class="item-quantity">
+          <span th:text="${'Qty: ' + item.quantity}">Qty: 1</span>
+        </div>
+        <div class="item-price" th:text="${'$' + item.plant.price/100}">$15.00</div>
+      </div>
+
+      <div class="order-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span th:text="${'$' + order.subTotalPrice/100}">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span th:text="${'$' + order.shippingPrice/100}">$0.00</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span th:text="${'$' + order.totalPrice/100}">$0.00</span>
+        </div>
+        <div class="delivery-address">
+          <span>Delivery Address:</span>
+          <address th:text="${order.address}">123 Plant Street, Garden City</address>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="orders-sidebar">
+    <h3>Account Navigation</h3>
+    <ul class="account-nav">
+      <li><a href="/account" class="account-link">Account Details</a></li>
+      <li><a href="/orders" class="account-link active">Order History</a></li>
+      <li><a href="/basket" class="account-link">Shopping Cart</a></li>
+    </ul>
+    <a href="/plants" class="btn" style="width: 100%; margin-top: 20px;">Continue Shopping</a>
+  </div>
+</main>
+</body>
+</html>

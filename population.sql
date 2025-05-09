@@ -1,0 +1,12 @@
+
+-- UPDATE plants SET picture_link = CASE name
+--                                      WHEN 'Red Rose' THEN 'https://images.unsplash.com/photo-1559563362-c667ba5f5480'
+--                                      WHEN 'White Lily' THEN 'https://images.unsplash.com/photo-1588873281272-14886ba1f737'
+--                                      WHEN 'Snake Plant' THEN 'https://images.unsplash.com/photo-1599009434802-8a458c511215'
+--                                      WHEN 'Monstera' THEN 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b'
+--                                      WHEN 'Tomato Plant' THEN 'https://images.unsplash.com/photo-1592841200221-a6898f307baa'
+--                                      WHEN 'Mint' THEN 'https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1'
+--                                      WHEN 'Basil' THEN 'https://images.unsplash.com/photo-1618375531912-867984bdfd87'
+--                                      WHEN 'Cactus' THEN 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a'
+--     END
+-- WHERE name IN ('Red Rose', 'White Lily', 'Snake Plant', 'Monstera', 'Tomato Plant', 'Mint', 'Basil', 'Cactus');

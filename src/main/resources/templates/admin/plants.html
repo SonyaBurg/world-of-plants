@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin - Manage Plants</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-left">
+        <div class="logo">
+            <a href="/">WORLD OF PLANTS</a>
+        </div>
+    </div>
+    <div class="nav-right">
+        <a href="/" class="home">HOME</a>
+        <a href="/plants" class="search">SEARCH</a>
+        <a href="account" class="account">ACCOUNT</a>
+        <a href="/basket" class="cart-icon">CART</a>
+        <a href="/orders" class="cart-icon">ORDERS</a>
+    </div>
+</nav>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Manage Plants</h1>
+        <button id="showAddPlantModal" class="btn">Add New Plant</button>
+    </div>
+
+    <div class="admin-dashboard">
+        <div class="admin-sidebar">
+            <div class="admin-menu">
+                <h2>Admin Menu</h2>
+                <ul>
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                    <li><a href="/admin/plants" class="active">Manage Plants</a></li>
+                    <li><a href="/admin/orders">View Orders</a></li>
+                    <li><a href="/admin/users">Manage Users</a></li>
+                </ul>
+                <div class="logout-button">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <div class="content-header">
+                <h2>Plants</h2>
+            </div>
+
+            <div th:if="${param.success}" class="alert alert-success">
+                <span th:text="${param.success}">Operation completed successfully!</span>
+            </div>
+
+            <div th:if="${param.error}" class="alert alert-error">
+                <span th:text="${param.error}">An error occurred!</span>
+            </div>
+
+            <div class="plants-management">
+                <table class="admin-table">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="plant : ${plants}">
+                        <td>
+                            <img th:src="${plant.pictureLink}" alt="Plant Image" style="width: 60px; height: 60px; object-fit: cover;">
+                        </td>
+                        <td th:text="${plant.name}">Plant Name</td>
+                        <td th:text="${plant.category}">Category</td>
+                        <td th:text="${#strings.abbreviate(plant.description, 50)}">Description</td>
+                        <td th:text="'$' + ${plant.price/100}">$19.99</td>
+                        <td class="actions">
+                            <button th:data-plant-name="${plant.name}"
+                                    th:data-plant-category="${plant.category}"
+                                    th:data-plant-description="${plant.description}"
+                                    th:data-plant-price="${plant.price}"
+                                    th:data-plant-picturelink="${plant.pictureLink}"
+                                    onclick="showEditModal(this)"
+                                    class="action-btn edit">Edit</button>
+                            <button th:data-plant-name="${plant.name}"
+                                    onclick="showDeleteConfirmation(this.getAttribute('data-plant-name'))"
+                                    class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Plant Modal -->
+<div id="addPlantModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Add New Plant</h3>
+            <button onclick="closeModal('addPlantModal')" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="addPlantForm" th:action="@{/admin/plants/add}" method="post">
+                <div class="form-group">
+                    <label for="addName">Name</label>
+                    <input type="text" id="addName" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="addCategory">Category</label>
+                    <select id="addCategory" name="category" class="form-control" required>
+                        <option value="Indoor Plants">Indoor Plants</option>
+                        <option value="Succulents">Succulents</option>
+                        <option value="Flowers">Flowers</option>
+                        <option value="Herbs">Herbs</option>
+                        <option value="Vegetables">Vegetables</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addDescription">Description</label>
+                    <textarea id="addDescription" name="description" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="addPrice">Price ($)</label>
+                    <input type="number" id="addPrice" name="price" step="0.01" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="addPictureLink">Picture URL</label>
+                    <input type="url" id="addPictureLink" name="pictureLink" class="form-control" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeModal('addPlantModal')" class="btn btn-secondary">Cancel</button>
+            <button onclick="submitAddForm()" class="btn">Add Plant</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Plant Modal -->
+<div id="editPlantModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Plant</h3>
+            <button onclick="closeModal('editPlantModal')" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="editPlantForm" th:action="@{/admin/plants/update}" method="post">
+                <input type="hidden" id="originalName" name="originalName">
+                <div class="form-group">
+                    <label for="editName">Name</label>
+                    <input type="text" id="editName" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCategory">Category</label>
+                    <select id="editCategory" name="category" class="form-control" required>
+                        <option value="Indoor Plants">Indoor Plants</option>
+                        <option value="Outdoor Plants">Outdoor Plants</option>
+                        <option value="Succulents">Succulents</option>
+                        <option value="Flowers">Flowers</option>
+                        <option value="Herbs">Herbs</option>
+                        <option value="Vegetables">Vegetables</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" name="description" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editPrice">Price ($)</label>
+                    <input type="number" id="editPrice" name="price" step="0.01" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPictureLink">Picture URL</label>
+                    <input type="url" id="editPictureLink" name="pictureLink" class="form-control" required>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeModal('editPlantModal')" class="btn btn-secondary">Cancel</button>
+            <button onclick="submitEditForm()" class="btn">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteConfirmModal" class="modal-backdrop" style="display: none;">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Confirm Deletion</h3>
+            <button onclick="closeModal('deleteConfirmModal')" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete <span id="plantToDelete"></span>?</p>
+            <p>This action cannot be undone.</p>
+            <form id="deletePlantForm" th:action="@{/admin/plants/delete}" method="post">
+                <input type="hidden" id="deletePlantName" name="name">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeModal('deleteConfirmModal')" class="btn btn-secondary">Cancel</button>
+            <button onclick="submitDeleteForm()" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Show Add Plant Modal
+    document.getElementById('showAddPlantModal').addEventListener('click', function() {
+        document.getElementById('addPlantModal').style.display = 'flex';
+    });
+
+    // Show Edit Modal
+    function showEditModal(button) {
+        const modal = document.getElementById('editPlantModal');
+        const originalName = button.getAttribute('data-plant-name');
+        const category = button.getAttribute('data-plant-category');
+        const description = button.getAttribute('data-plant-description');
+        const price = button.getAttribute('data-plant-price');
+        const pictureLink = button.getAttribute('data-plant-picturelink');
+
+        document.getElementById('originalName').value = originalName;
+        document.getElementById('editName').value = originalName;
+        document.getElementById('editCategory').value = category;
+        document.getElementById('editDescription').value = description;
+        document.getElementById('editPrice').value = (price / 100).toFixed(2);
+        document.getElementById('editPictureLink').value = pictureLink;
+
+        modal.style.display = 'flex';
+    }
+
+    // Show Delete Confirmation
+    function showDeleteConfirmation(plantName) {
+        const modal = document.getElementById('deleteConfirmModal');
+        document.getElementById('plantToDelete').textContent = plantName;
+        document.getElementById('deletePlantName').value = plantName;
+        modal.style.display = 'flex';
+    }
+
+    // Close Modal
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Submit Add Form
+    function submitAddForm() {
+        // Get the form
+        const form = document.getElementById('addPlantForm');
+
+        // Convert dollar price to cents and add as hidden field
+        const priceInput = document.getElementById('addPrice');
+        const priceInDollars = parseFloat(priceInput.value);
+
+        // Create hidden input for price in cents if it doesn't exist
+        let hiddenPriceInput = form.querySelector('input[name="priceCents"]');
+        if (!hiddenPriceInput) {
+            hiddenPriceInput = document.createElement('input');
+            hiddenPriceInput.type = 'hidden';
+            hiddenPriceInput.name = 'priceCents';
+            form.appendChild(hiddenPriceInput);
+        }
+
+        // Set the value
+        hiddenPriceInput.value = Math.round(priceInDollars * 100);
+
+        // Submit the form
+        form.submit();
+    }
+
+    function submitEditForm() {
+        const form = document.getElementById('editPlantForm');
+
+        const priceInput = document.getElementById('editPrice');
+        const priceInDollars = parseFloat(priceInput.value);
+
+        let hiddenPriceInput = form.querySelector('input[name="priceCents"]');
+        if (!hiddenPriceInput) {
+            hiddenPriceInput = document.createElement('input');
+            hiddenPriceInput.type = 'hidden';
+            hiddenPriceInput.name = 'priceCents';
+            form.appendChild(hiddenPriceInput);
+        }
+
+        // Set the value
+        hiddenPriceInput.value = Math.round(priceInDollars * 100);
+
+        // Submit the form
+        form.submit();
+    }
+
+    // Submit Delete Form
+    function submitDeleteForm() {
+        document.getElementById('deletePlantForm').submit();
+    }
+
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+        const modals = document.getElementsByClassName('modal-backdrop');
+        for (let i = 0; i < modals.length; i++) {
+            if (event.target === modals[i]) {
+                modals[i].style.display = 'none';
+            }
+        }
+    });
+</script>
+</body>
+</html>
