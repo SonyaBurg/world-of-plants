@@ -28,8 +28,7 @@ class OrderEntity(
     @GeneratedValue
     lateinit var id: UUID
 
-    @Column(name = "order_number", nullable = false)
-    @SequenceGenerator(name = "order_number_seq", sequenceName = "order_number_seq", allocationSize = 1, initialValue = 1)
+    @Column(name = "order_number", insertable = false, updatable = false)
     var orderNumber: Int = 0
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)

@@ -41,11 +41,11 @@ VALUES ('10eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'john.doe@example.com',
 
 INSERT INTO orders (id, user_id, total_price, address, date, status)
 VALUES ('40eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', '10eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 4500, '123 Main St, City',
-        '2024-03-15 10:00:00', 'COMPLETED'),
+        '2024-02-15 10:00:00', 'COMPLETED'),
        ('50eebc99-9c0b-4ef8-bb6d-6bb9bd380a12', '20eebc99-9c0b-4ef8-bb6d-6bb9bd380a12', 3200, '456 Oak Ave, Town',
         '2024-03-16 11:30:00', 'PAID'),
        ('60eebc99-9c0b-4ef8-bb6d-6bb9bd380a13', '10eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 2000, '789 Pine Rd, Village',
-        '2024-03-17 14:15:00', 'PENDING');
+        '2024-04-17 14:15:00', 'PENDING');
 
 INSERT INTO ordered_plants (id, name, quantity, order_id, category, description, price, picture_link)
 VALUES ('70eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'Red Rose', 2, '40eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',

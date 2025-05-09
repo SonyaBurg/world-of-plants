@@ -39,7 +39,7 @@ create table ordered_plants
     quantity       int          not null,
     order_id       uuid         not null,
     FOREIGN KEY (order_id)
-        REFERENCES orders (id),
+        REFERENCES orders (id) ON DELETE CASCADE,
     price          int          not null,
     description    TEXT         not null,
     category       varchar(100) not null,
@@ -62,7 +62,7 @@ create table basket_items
     quantity int  not null,
     user_id  uuid not null,
     plant_id uuid not null,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (plant_id) REFERENCES plants (id),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (plant_id) REFERENCES plants (id) ON DELETE CASCADE,
     unique (user_id, plant_id)
 );
