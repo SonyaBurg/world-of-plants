@@ -28,7 +28,7 @@
     <div class="cart-items">
         <div th:if="${cart.items.isEmpty()}" class="empty-orders">
             <p>Your basket is empty</p>
-            <a href="/plants" class="continue-shopping">Start Shopping</a>
+            <a href="/plants" class="checkout-btn">Start Shopping</a>
         </div>
         <div th:if="${!cart.items.isEmpty()}" th:each="item : ${cart.items}" class="cart-item">
             <div class="item-image">
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="cart-summary">
+    <div th:if="${!cart.items.isEmpty()}" th:each="item : ${cart.items}" class="cart-summary">
         <h3>Order Summary</h3>
         <div class="summary-row">
             <span>Subtotal</span>
