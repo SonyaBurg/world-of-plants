@@ -1,5 +1,5 @@
 alter table orders
-    add column order_number SERIAL;
+    add column order_number SERIAL not null;
 
 create sequence order_number_seq restart with 100;
 
