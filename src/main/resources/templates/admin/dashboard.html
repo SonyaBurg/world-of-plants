@@ -38,7 +38,6 @@
                         <li><a href="/admin/dashboard" class="active">Dashboard</a></li>
                         <li><a href="/admin/plants">Manage Plants</a></li>
                         <li><a href="/admin/orders">View Orders</a></li>
-                        <li><a href="/admin/users">Manage Users</a></li>
                     </ul>
                     <div class="card-footer">
                         <form th:action="@{/logout}" method="post">
@@ -212,69 +211,3 @@
 </style>
 </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Admin Dashboard</title>-->
-<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<nav class="top-nav">-->
-<!--    <div class="nav-left">-->
-<!--        <div class="logo">WORLD OF PLANTS</div>-->
-<!--    </div>-->
-<!--    <div class="nav-right">-->
-<!--        <a href="/" class="home">HOME</a>-->
-<!--        <a href="/admin/dashboard" class="account">DASHBOARD</a>-->
-<!--        <a href="/admin/plants" class="account">PLANTS</a>-->
-<!--        <a href="/admin/orders" class="cart-icon">ORDERS</a>-->
-<!--        <a href="/admin/users" class="cart-icon">USERS</a>-->
-<!--    </div>-->
-<!--</nav>-->
-
-
-<!--<div class="admin-container">-->
-<!--    <div class="admin-header">-->
-<!--        <h1>Admin Dashboard</h1>-->
-<!--    </div>-->
-
-<!--    <div class="admin-menu">-->
-<!--        <ul>-->
-<!--            <li><a href="/admin/dashboard">Dashboard</a></li>-->
-<!--            <li><a href="/admin/plants" class="active">Manage Plants</a></li>-->
-<!--            <li><a href="/admin/orders">View Orders</a></li>-->
-<!--            <li><a href="/admin/users">Manage Users</a></li>-->
-<!--        </ul>-->
-<!--        <div class="logout-button">-->
-<!--            <form th:action="@{/logout}" method="post">-->
-<!--                <button type="submit" class="logout-btn">Logout</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-<!--    &lt;!&ndash;    <div th:if="${param.adminRegistered}">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <div class="alert alert-success">New admin user successfully registered.</div>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--    &lt;!&ndash;    <div class="admin-menu">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <h2>Admin Actions</h2>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <ul>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li><a th:href="@{/admin/plants}">Manage Plants</a></li>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li><a th:href="@{/admin/orders}">View Orders</a></li>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <li><a th:href="@{/admin/users}">Manage Users</a></li>&ndash;&gt;-->
-<!--    &lt;!&ndash;        </ul>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--    &lt;!&ndash;    &lt;!&ndash; Add additional admin dashboard content here &ndash;&gt;&ndash;&gt;-->
-
-<!--    &lt;!&ndash;    <div class="logout-button">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <form th:action="@{/logout}" method="post">&ndash;&gt;-->
-<!--    &lt;!&ndash;            <button type="submit" class="btn">Logout</button>&ndash;&gt;-->
-<!--    &lt;!&ndash;        </form>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
