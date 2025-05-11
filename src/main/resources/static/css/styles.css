@@ -243,6 +243,7 @@ body {
 /* News section */
 .news-section {
     padding: 80px 40px;
+    position: relative;
 }
 
 .news-title {
@@ -252,23 +253,51 @@ body {
     margin-bottom: 40px;
 }
 
+.news-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 .news-grid {
     display: flex;
     gap: 20px;
     position: relative;
 }
 
+.news-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+}
+
 .news-card {
-    flex: 1;
+    flex: 0 0 calc(33.333% - 14px);
     background-color: #f0efed;
     overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: calc(33.333% - 14px);
 }
 
 .news-image {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 200px;
+    overflow: hidden;
     background: #e5e5e5;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
 }
 
 .news-content {
@@ -288,25 +317,38 @@ body {
 }
 
 .slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    width: 100%;
-    top: 50%;
+    padding: 0 20px;
     transform: translateY(-50%);
-    padding: 0 -15px;
+    z-index: 10;
+    pointer-events: none;
 }
 
 .slider-arrow {
-    background-color: rgba(255, 255, 255, 0.8);
-    width: 30px;
-    height: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
 }
+
+.slider-arrow:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+}
+
 
 /* Cart Page Styles */
 .cart-header {
