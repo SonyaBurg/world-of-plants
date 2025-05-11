@@ -27,7 +27,9 @@
     </div>
 
     <div class="admin-dashboard">
+        <div class="admin-sidebar">
             <div class="admin-menu">
+                <h2>Admin Panel</h2>
                 <ul>
                     <li><a href="/admin/dashboard">Dashboard</a></li>
                     <li><a href="/admin/plants">Manage Plants</a></li>
@@ -38,6 +40,7 @@
                         <button type="submit" class="logout-btn">Logout</button>
                     </form>
                 </div>
+            </div>
         </div>
 
         <div class="admin-content">
@@ -53,18 +56,17 @@
                 <span th:text="${param.error}">An error occurred!</span>
             </div>
 
-            <!-- Order filters -->
-            <div class="order-filters" style="margin-bottom: 20px; display: flex; gap: 15px;">
-                <form th:action="@{/admin/orders}" method="get" style="display: flex; gap: 10px;">
-                    <select name="status" class="form-control" style="width: auto;">
+            <div class="order-filters">
+                <form th:action="@{/admin/orders}" method="get">
+                    <select name="status" class="form-control">
                         <option value="">All Statuses</option>
                         <option value="PENDING" th:selected="${param.status == 'PENDING'}">Pending</option>
                         <option value="PAID" th:selected="${param.status == 'PAID'}">Paid</option>
                         <option value="SHIPPED" th:selected="${param.status == 'SHIPPED'}">Shipped</option>
                         <option value="COMPLETED" th:selected="${param.status == 'COMPLETED'}">Completed</option>
                     </select>
-                    <button type="submit" class="btn" style="padding: 6px 12px;">Filter</button>
-                    <a th:href="@{/admin/orders}" class="btn btn-secondary" style="padding: 6px 12px;">Reset</a>
+                    <button type="submit" class="btn">Filter</button>
+                    <a th:href="@{/admin/orders}" class="btn btn-secondary">Reset</a>
                 </form>
             </div>
 
@@ -105,26 +107,11 @@
                     </tr>
                     </tbody>
                 </table>
-
-                <!-- Pagination controls if needed -->
-<!--                <div class="pagination" th:if="${totalPages > 1}">-->
-<!--                    <a th:href="@{/admin/orders(page=0, status=${param.status})}" th:class="${currentPage == 0 ? 'active' : ''}">First</a>-->
-<!--                    <a th:if="${currentPage > 0}" th:href="@{/admin/orders(page=${currentPage - 1}, status=${param.status})}">Previous</a>-->
-<!--                    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">-->
-<!--                            <a th:if="${i >= currentPage - 2 && i <= currentPage + 2}"-->
-<!--                               th:href="@{/admin/orders(page=${i}, status=${param.status})}"-->
-<!--                               th:class="${currentPage == i ? 'active' : ''}"-->
-<!--                               th:text="${i + 1}">1</a>-->
-<!--                        </span>-->
-<!--                    <a th:if="${currentPage < totalPages - 1}" th:href="@{/admin/orders(page=${currentPage + 1}, status=${param.status})}">Next</a>-->
-<!--                    <a th:href="@{/admin/orders(page=${totalPages - 1}, status=${param.status})}" th:class="${currentPage == totalPages - 1 ? 'active' : ''}">Last</a>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
 </div>
 
-<!-- Order Details Modal -->
 <div id="orderDetailsModal" class="modal-backdrop" style="display: none;">
     <div class="modal" style="max-width: 800px;">
         <div class="modal-header">
@@ -179,7 +166,6 @@
     </div>
 </div>
 
-<!-- Update Status Modal -->
 <div id="updateStatusModal" class="modal-backdrop" style="display: none;">
     <div class="modal">
         <div class="modal-header">
@@ -208,13 +194,10 @@
 </div>
 
 <script>
-    // Show Order Details Modal
     function showOrderDetails(orderId) {
-        // In a real implementation, you'd fetch the order details using AJAX
         fetch(`/admin/orders/${orderId}/details`)
             .then(response => response.json())
             .then(order => {
-                // Populate the modal with order details
                 document.getElementById('orderDate').textContent = order.date;
                 document.getElementById('orderStatus').textContent = order.status;
                 document.getElementById('customerName').textContent = `${order.user.firstName} ${order.user.lastName}`;
@@ -222,7 +205,6 @@
                 document.getElementById('customerPhone').textContent = order.user.phoneNumber || 'Not provided';
                 document.getElementById('shippingAddress').textContent = order.address;
 
-                // Populate order items
                 const itemsTable = document.getElementById('orderItemsTable');
                 itemsTable.innerHTML = '';
 
@@ -237,12 +219,10 @@
                     itemsTable.appendChild(row);
                 });
 
-                // Set order totals
                 document.getElementById('orderSubtotal').textContent = `$${(order.subTotalPrice/100).toFixed(2)}`;
                 document.getElementById('orderShipping').textContent = `$${(order.shippingPrice/100).toFixed(2)}`;
                 document.getElementById('orderTotal').textContent = `$${(order.totalPrice/100).toFixed(2)}`;
 
-                // Show the modal
                 document.getElementById('orderDetailsModal').style.display = 'flex';
             })
             .catch(error => {
@@ -251,24 +231,20 @@
             });
     }
 
-    // Show Update Status Modal
     function showStatusUpdateModal(orderId, currentStatus) {
         document.getElementById('updateOrderId').value = orderId;
         document.getElementById('updateStatus').value = currentStatus;
         document.getElementById('updateStatusModal').style.display = 'flex';
     }
 
-    // Close Modal
     function closeModal(modalId) {
         document.getElementById(modalId).style.display = 'none';
     }
 
-    // Submit Update Status Form
     function submitUpdateStatus() {
         document.getElementById('updateStatusForm').submit();
     }
 
-    // Print Order
     function printOrder() {
         const orderDetails = document.getElementById('orderDetails').innerHTML;
         const printWindow = window.open('', '_blank');
@@ -294,7 +270,6 @@
         printWindow.print();
     }
 
-    // Close modals when clicking outside
     window.addEventListener('click', function(event) {
         const modals = document.getElementsByClassName('modal-backdrop');
         for (let i = 0; i < modals.length; i++) {

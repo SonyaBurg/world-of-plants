@@ -188,19 +188,27 @@ body {
     background-color: #dba28c;
 }
 
+.logout-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logout-button form {
+    display: inline-block;
+}
+
 .logout-btn {
+    width: 200px;
+    padding: 12px;
     background-color: #ffe6e6;
     color: #cc0000;
     border: 1px solid #ffcccc;
-    padding: 12px 24px;
+    border-radius: 4px;
     font-size: 14px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     cursor: pointer;
-    border-radius: 2px;
-    text-decoration: none;
-    display: inline-block;
+    transition: all 0.3s;
     text-transform: uppercase;
-    transition: background-color 0.3s;
 }
 
 .logout-btn:hover {
@@ -783,18 +791,17 @@ body {
 /* ADMIN */
 /* Admin Dashboard Styles */
 .admin-container {
+    padding: 20px 40px;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
 }
 
 .admin-header {
-    background: linear-gradient(to right, #F0E7DE, #F0DFD8);
-    padding: 40px 60px;
-    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
 }
 
 .admin-header h1 {
@@ -810,42 +817,56 @@ body {
 
 .admin-dashboard {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: 30px;
+    min-height: calc(100vh - 200px);
 }
 
 .admin-sidebar {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.admin-menu {
     background-color: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
 }
 
 .admin-menu h2 {
-    background: linear-gradient(to right, #F0E7DE, #F0DFD8);
-    padding: 20px;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: normal;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 4px;
+    color: #e6b8a2;
 }
 
 .admin-menu ul {
     list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
 }
 
 .admin-menu li {
-    border-bottom: 1px solid #f7f6f4;
+    margin-bottom: 15px;
 }
 
 .admin-menu a {
     display: block;
-    padding: 15px 20px;
+    padding: 12px 15px;
     color: #666;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 0.5px;
     transition: all 0.3s;
+    border-radius: 4px;
+    text-align: center;
 }
 
 .admin-menu a:hover {
@@ -860,15 +881,13 @@ body {
 
 .admin-content {
     background-color: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 30px;
 }
 
 .content-header {
     margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
 }
 
 .content-header h2 {
@@ -925,6 +944,7 @@ body {
     padding: 12px 15px;
     font-size: 14px;
     border-bottom: 1px solid #f7f6f4;
+    vertical-align: middle;
 }
 
 .admin-table tr:hover {
@@ -934,6 +954,7 @@ body {
 .actions {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .action-btn {
@@ -943,10 +964,14 @@ body {
     font-size: 14px;
     color: #e6b8a2;
     transition: color 0.3s;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
 }
 
 .action-btn:hover {
     color: #dba28c;
+    background-color: #f7f6f4;
 }
 
 .action-btn.delete {
@@ -955,6 +980,7 @@ body {
 
 .action-btn.delete:hover {
     color: #aa0000;
+    background-color: #ffe6e6;
 }
 
 .admin-form {
@@ -1148,25 +1174,17 @@ textarea.form-control {
     gap: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .admin-dashboard {
         grid-template-columns: 1fr;
     }
 
-    .admin-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 20px;
+    .admin-sidebar {
+        position: static;
     }
 
-    .stats-grid, .plant-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .admin-table {
-        display: block;
-        overflow-x: auto;
+    .admin-menu {
+        margin-bottom: 30px;
     }
 }
 
@@ -1299,4 +1317,30 @@ textarea.form-control {
     .stats-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.order-filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.order-filters form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.order-filters .form-control {
+    width: auto;
+    min-width: 150px;
+}
+
+.order-filters .btn {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    white-space: nowrap;
 }

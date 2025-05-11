@@ -30,7 +30,7 @@
     <div class="admin-dashboard">
         <div class="admin-sidebar">
             <div class="admin-menu">
-                <h2>Admin Menu</h2>
+                <h2>Admin Panel</h2>
                 <ul>
                     <li><a href="/admin/dashboard">Dashboard</a></li>
                     <li><a href="/admin/plants" class="active">Manage Plants</a></li>
@@ -98,7 +98,6 @@
     </div>
 </div>
 
-<!-- Add Plant Modal -->
 <div id="addPlantModal" class="modal-backdrop" style="display: none;">
     <div class="modal">
         <div class="modal-header">
@@ -142,7 +141,6 @@
     </div>
 </div>
 
-<!-- Edit Plant Modal -->
 <div id="editPlantModal" class="modal-backdrop" style="display: none;">
     <div class="modal">
         <div class="modal-header">
@@ -188,7 +186,6 @@
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
 <div id="deleteConfirmModal" class="modal-backdrop" style="display: none;">
     <div class="modal">
         <div class="modal-header">
@@ -210,12 +207,10 @@
 </div>
 
 <script>
-    // Show Add Plant Modal
     document.getElementById('showAddPlantModal').addEventListener('click', function() {
         document.getElementById('addPlantModal').style.display = 'flex';
     });
-
-    // Show Edit Modal
+    
     function showEditModal(button) {
         const modal = document.getElementById('editPlantModal');
         const originalName = button.getAttribute('data-plant-name');
@@ -233,30 +228,24 @@
 
         modal.style.display = 'flex';
     }
-
-    // Show Delete Confirmation
+    
     function showDeleteConfirmation(plantName) {
         const modal = document.getElementById('deleteConfirmModal');
         document.getElementById('plantToDelete').textContent = plantName;
         document.getElementById('deletePlantName').value = plantName;
         modal.style.display = 'flex';
     }
-
-    // Close Modal
+    
     function closeModal(modalId) {
         document.getElementById(modalId).style.display = 'none';
     }
-
-    // Submit Add Form
+    
     function submitAddForm() {
-        // Get the form
         const form = document.getElementById('addPlantForm');
-
-        // Convert dollar price to cents and add as hidden field
+        
         const priceInput = document.getElementById('addPrice');
         const priceInDollars = parseFloat(priceInput.value);
-
-        // Create hidden input for price in cents if it doesn't exist
+        
         let hiddenPriceInput = form.querySelector('input[name="priceCents"]');
         if (!hiddenPriceInput) {
             hiddenPriceInput = document.createElement('input');
@@ -264,11 +253,9 @@
             hiddenPriceInput.name = 'priceCents';
             form.appendChild(hiddenPriceInput);
         }
-
-        // Set the value
+        
         hiddenPriceInput.value = Math.round(priceInDollars * 100);
-
-        // Submit the form
+        
         form.submit();
     }
 
@@ -285,20 +272,14 @@
             hiddenPriceInput.name = 'priceCents';
             form.appendChild(hiddenPriceInput);
         }
-
-        // Set the value
         hiddenPriceInput.value = Math.round(priceInDollars * 100);
-
-        // Submit the form
         form.submit();
     }
-
-    // Submit Delete Form
+    
     function submitDeleteForm() {
         document.getElementById('deletePlantForm').submit();
     }
-
-    // Close modals when clicking outside
+    
     window.addEventListener('click', function(event) {
         const modals = document.getElementsByClassName('modal-backdrop');
         for (let i = 0; i < modals.length; i++) {
