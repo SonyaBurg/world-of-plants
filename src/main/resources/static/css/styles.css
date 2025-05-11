@@ -358,7 +358,7 @@ body {
 }
 
 
-/* Cart Page Styles */
+/* cart */
 .cart-header {
     background: linear-gradient(to right, #F0E7DE, #F0DFD8);
     padding: 40px 60px;
@@ -382,6 +382,34 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
+}
+
+.cart-container:has(.empty-orders) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.cart-container:has(.empty-orders) .cart-items {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.empty-orders {
+    text-align: center;
+}
+
+.empty-orders p {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.empty-orders .checkout-btn {
+    width: auto;
+    min-width: 200px;
 }
 
 .cart-items {
@@ -550,7 +578,6 @@ body {
     padding: 10px 15px;
 }
 
-/* Remove arrows from number input */
 .quantity-input::-webkit-outer-spin-button,
 .quantity-input::-webkit-inner-spin-button {
     /*-webkit-appearance: none;*/
@@ -565,7 +592,7 @@ body {
     -moz-appearance: textfield;
 }
 
-/* Authentication Pages Styles */
+/* auth pages */
 .login-container,
 .register-container {
     max-width: 400px;
@@ -1300,7 +1327,7 @@ textarea.form-control {
     text-decoration: none;
 }
 
-/* Responsive layout adjustments */
+/* Responsive layout */
 @media (max-width: 992px) {
     .dashboard-flex-container {
         flex-direction: column;
