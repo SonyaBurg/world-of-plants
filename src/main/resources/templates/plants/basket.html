@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div th:if="${!cart.items.isEmpty()}" th:each="item : ${cart.items}" class="cart-summary">
+    <div th:if="${!cart.items.isEmpty()}" class="cart-summary">
         <h3>Order Summary</h3>
         <div class="summary-row">
             <span>Subtotal</span>
