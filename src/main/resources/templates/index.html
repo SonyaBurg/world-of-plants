@@ -57,39 +57,117 @@
 
 <section class="news-section">
     <h2 class="news-title">Our Latest News</h2>
-    <div class="news-grid">
-        <div class="news-card">
-            <div class="news-image"></div>
-            <div class="news-content">
-                <h3 class="news-card-title">The Original is Back!</h3>
-                <p class="news-card-text">
-                    70 years since its introduction. Buy our iconic Fritz Hansen Original Chair in limited edition.
-                </p>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="news-image"></div>
-            <div class="news-content">
-                <h3 class="news-card-title">Quick Sale: 25% off!</h3>
-                <p class="news-card-text">
-                    Now a shopping 25% discount on the entire Radish collection! So don't wait to save big today.
-                </p>
-            </div>
-        </div>
-        <div class="news-card">
-            <div class="news-image"></div>
-            <div class="news-content">
-                <h3 class="news-card-title">Design Deals</h3>
-                <p class="news-card-text">
-                    This week the Spectrum Premium Chair is one of our weekly deals. Get 15% off all colors.
-                </p>
-            </div>
+    <div class="news-container">
+        <div class="news-grid">
+            <div class="news-track"></div>
         </div>
         <div class="slider-controls">
-            <div class="slider-arrow">←</div>
-            <div class="slider-arrow">→</div>
+            <div class="slider-arrow" onclick="slideNews('prev')">←</div>
+            <div class="slider-arrow" onclick="slideNews('next')">→</div>
         </div>
     </div>
 </section>
+
+
+<script>
+    const newsCards = [
+        {
+            image: "https://images.unsplash.com/photo-1525498128493-380d1990a112?w=500&auto=format&fit=crop&q=60",
+            title: "Rare Plants Arrival",
+            text: "Exclusive collection of rare and exotic plants just arrived! Including the stunning Monstera Albo and Pink Princess Philodendron."
+        },
+        {
+            image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?w=500&auto=format&fit=crop&q=60",
+            title: "Garden Design Consultation",
+            text: "Book a free consultation with our landscape designers to transform your outdoor space into a beautiful garden oasis."
+        },
+        {
+            image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=500&auto=format&fit=crop&q=60",
+            title: "Plant Subscription Boxes are coming!",
+            text: "Starting this June, you will be able subscribe to our monthly plant box and receive carefully selected plants, care guides, and exclusive member discounts. Stay tuned!"
+        },
+        {
+            image: "https://images.unsplash.com/photo-1466781783364-36c955e42a7f?w=500&auto=format&fit=crop&q=60",
+            title: "Spring Collection 2024",
+            text: "Discover our new spring collection featuring rare orchids, exotic succulents, and beautiful flowering plants. Limited stock available!"
+        },
+        {
+            image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=500&auto=format&fit=crop&q=60",
+            title: "Plant Care Workshop",
+            text: "Join our expert botanists for a free workshop on plant care and maintenance. Learn essential tips for keeping your plants healthy and thriving."
+        },
+        {
+            image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=500&auto=format&fit=crop&q=60",
+            title: "Special Offer: 20% Off",
+            text: "Get 20% off on all indoor plants this week! Perfect time to add some greenery to your home or office space."
+        },
+        {
+            image: "https://i.pinimg.com/736x/01/2d/d1/012dd10db8374e31811cd42eea8a6aeb.jpg",
+            title: "Tomato Plants Now In Stock!",
+            text: "Add a touch of homegrown goodness to your garden with our new tomato plants. Fresh, organic, and perfect for your kitchen!"
+        }
+    ];
+
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    function createNewsCard(news) {
+        return `
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="${news.image}" alt="${news.title}">
+                </div>
+                <div class="news-content">
+                    <h3 class="news-card-title">${news.title}</h3>
+                    <p class="news-card-text">${news.text}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderTrack(index) {
+        const track = document.querySelector('.news-track');
+        const cards = [];
+        for (let i = -1; i < 4; i++) {
+            const cardIndex = (index + i + newsCards.length) % newsCards.length;
+            cards.push(createNewsCard(newsCards[cardIndex]));
+        }
+        track.innerHTML = cards.join('');
+        track.style.transform = 'translateX(-33.333%)';
+    }
+
+    function slideNews(direction) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const track = document.querySelector('.news-track');
+        const shift = direction === 'next' ? '-66.666%' : '0%';
+
+        track.style.transition = 'transform 0.5s ease-in-out';
+        track.style.transform = `translateX(${shift})`;
+
+        track.addEventListener('transitionend', function handler() {
+            track.removeEventListener('transitionend', handler);
+
+            currentIndex = direction === 'next'
+                ? (currentIndex + 1) % newsCards.length
+                : (currentIndex - 1 + newsCards.length) % newsCards.length;
+
+            renderTrack(currentIndex);
+
+            track.style.transition = 'none';
+            track.style.transform = 'translateX(-33.333%)';
+
+            void track.offsetWidth;
+            track.style.transition = 'transform 0.5s ease-in-out';
+
+            isAnimating = false;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTrack(currentIndex);
+    });
+</script>
 </body>
 </html>
