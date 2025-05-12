@@ -42,10 +42,10 @@ class OrdersServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun getOrdersForCustomer(email: String): List<Order> {
-        val user = userRepository.findUserEntityByLogin(email)
-            ?: error("Customer with email $email not found")
-        return user.orders.map { it.compose() }
+    override fun getOrdersForCustomer(login: String): List<Order> {
+        val user = userRepository.findUserEntityByLogin(login)
+            ?: error("Customer with email $login not found")
+        return user.orders.sortedByDescending { it.date }.map { it.compose() }
     }
 
     @Transactional
