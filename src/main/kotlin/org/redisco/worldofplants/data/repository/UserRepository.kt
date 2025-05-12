@@ -1,6 +1,6 @@
-package org.redisco.worldofplants.repository
+package org.redisco.worldofplants.data.repository
 
-import org.redisco.worldofplants.entities.UserEntity
+import org.redisco.worldofplants.data.entities.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 

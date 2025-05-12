@@ -1,4 +1,4 @@
-package org.redisco.worldofplants.dtos
+package org.redisco.worldofplants.controller.dtos
 
 data class MonthlyRevenue(
     val labels: List<String>,

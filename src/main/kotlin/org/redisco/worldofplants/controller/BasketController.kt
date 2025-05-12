@@ -1,6 +1,6 @@
 package org.redisco.worldofplants.controller
 
-import org.redisco.worldofplants.dtos.BasketItemInsertRequest
+import org.redisco.worldofplants.controller.dtos.BasketItemInsertRequest
 import org.redisco.worldofplants.service.UserService
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller

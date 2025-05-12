@@ -1,9 +1,9 @@
 package org.redisco.worldofplants.service
 
-import org.redisco.worldofplants.dtos.Plant
-import org.redisco.worldofplants.entities.PlantEntity
-import org.redisco.worldofplants.repository.BasketItemRepository
-import org.redisco.worldofplants.repository.PlantsRepository
+import org.redisco.worldofplants.controller.dtos.Plant
+import org.redisco.worldofplants.data.entities.PlantEntity
+import org.redisco.worldofplants.data.repository.BasketItemRepository
+import org.redisco.worldofplants.data.repository.PlantsRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -50,7 +50,6 @@ class PlantsServiceImpl(
             name = plant.name,
             category = plant.category,
             description = plant.description,
-            itemsInStock = 10, // Default value, adjust as needed
             price = plant.price,
             pictureLink = plant.pictureLink
         )
@@ -73,7 +72,6 @@ class PlantsServiceImpl(
             name = updatedPlant.name
             category = updatedPlant.category
             description = updatedPlant.description
-            itemsInStock = existingPlant.itemsInStock
             price = updatedPlant.price
             pictureLink = updatedPlant.pictureLink
         }

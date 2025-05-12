@@ -1,8 +1,8 @@
 package org.redisco.worldofplants.controller
 
-import org.redisco.worldofplants.dtos.Order
-import org.redisco.worldofplants.dtos.Plant
-import org.redisco.worldofplants.entities.OrderStatus
+import org.redisco.worldofplants.controller.dtos.Order
+import org.redisco.worldofplants.controller.dtos.Plant
+import org.redisco.worldofplants.data.entities.OrderStatus
 import org.redisco.worldofplants.service.OrdersService
 import org.redisco.worldofplants.service.PlantsService
 import org.springframework.http.ResponseEntity

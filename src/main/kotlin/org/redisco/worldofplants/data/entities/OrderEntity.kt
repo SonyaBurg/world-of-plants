@@ -1,4 +1,4 @@
-package org.redisco.worldofplants.entities
+package org.redisco.worldofplants.data.entities
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

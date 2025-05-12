@@ -1,9 +1,9 @@
 package org.redisco.worldofplants.service
 
-import org.redisco.worldofplants.dtos.GeneralStatistics
-import org.redisco.worldofplants.repository.OrderedPlantsRepository
-import org.redisco.worldofplants.repository.OrdersRepository
-import org.redisco.worldofplants.repository.UserRepository
+import org.redisco.worldofplants.controller.dtos.GeneralStatistics
+import org.redisco.worldofplants.data.repository.OrderedPlantsRepository
+import org.redisco.worldofplants.data.repository.OrdersRepository
+import org.redisco.worldofplants.data.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

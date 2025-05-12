@@ -1,7 +1,7 @@
 package org.redisco.worldofplants.config.admin
 
-import org.redisco.worldofplants.entities.Role
-import org.redisco.worldofplants.repository.UserRepository
+import org.redisco.worldofplants.data.entities.Role
+import org.redisco.worldofplants.data.repository.UserRepository
 import org.redisco.worldofplants.service.RegisterRequest
 import org.redisco.worldofplants.service.UserService
 import org.slf4j.LoggerFactory
