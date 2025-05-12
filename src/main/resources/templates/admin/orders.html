@@ -91,7 +91,7 @@
                         <td th:text="${order.date}">2024-05-01</td>
                         <td th:text="${order.user.login}">username</td>
                         <td th:text="${order.items.size()}">3</td>
-                        <td th:text="'$' + ${order.totalPrice/100}">$45.99</td>
+                        <td th:text="'$' + ${order.totalPrice}">$45.99</td>
                         <td>
                             <span th:class="'order-status-badge status-' + ${#strings.toLowerCase(order.status)}" th:text="${order.status}">Pending</span>
                         </td>
@@ -221,7 +221,7 @@
 
                 document.getElementById('orderSubtotal').textContent = `$${(order.subTotalPrice/100).toFixed(2)}`;
                 document.getElementById('orderShipping').textContent = `$${(order.shippingPrice/100).toFixed(2)}`;
-                document.getElementById('orderTotal').textContent = `$${(order.totalPrice/100).toFixed(2)}`;
+                document.getElementById('orderTotal').textContent = `$${(order.totalPrice).toFixed(2)}`;
 
                 document.getElementById('orderDetailsModal').style.display = 'flex';
             })
