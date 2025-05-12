@@ -22,6 +22,7 @@ interface UserService {
     fun getCurrentUser(username: String): User
     fun updateUser(username: String, updateRequest: UpdateUserRequest): Result<User>
     fun addItemToBasket(login: String, itemName: String, quantity: Int): BasketItemEntity
+    fun deleteBasketItem(username: String, plantName: String)
 }
 
 @Service
@@ -111,6 +112,19 @@ class UserServiceImpl(
 
         val savedUser = userRepository.save(userEntity)
         return Result.success(savedUser.compose())
+    }
+
+    @Transactional
+    override fun deleteBasketItem(username: String, plantName: String) {
+        val user = userRepository.findUserEntityByLogin(username)
+            ?: error("User not found with login: $username")
+        val plant = plantsRepository.findPlantEntityByName(plantName)
+            ?: error("Plant with name $plantName not found")
+
+        val basketItem = basketItemsRepository.findByUserIdAndPlantId(user.id, plant.id)
+            ?: error("Basket item not found")
+
+        basketItemsRepository.delete(basketItem)
     }
 }
 

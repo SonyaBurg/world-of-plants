@@ -8,6 +8,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class BasketController(private val userService: UserService) {
@@ -25,5 +26,12 @@ class BasketController(private val userService: UserService) {
         val username = SecurityContextHolder.getContext().authentication.name
         userService.addItemToBasket(username, basketItemInsertRequest.plantName, basketItemInsertRequest.quantity)
         return "redirect:/plants"
+    }
+
+    @PostMapping("/basket/delete")
+    fun deleteItem(@RequestParam plantName: String): String {
+        val username = SecurityContextHolder.getContext().authentication.name
+        userService.deleteBasketItem(username, plantName)
+        return "redirect:/basket"
     }
 }

@@ -18,17 +18,19 @@ class PlantsController(
     @GetMapping("/plants")
     fun listPlants(
         @RequestParam(required = false) category: String?,
+        @RequestParam(required = false) search: String?,
         model: Model
     ): String {
-        val plants = if (category != null) {
-            plantService.fetchPlantsByCategory(category)
-        } else {
-            plantService.fetchAllPlants()
+        val plants = when {
+            !search.isNullOrBlank() -> plantService.searchPlants(search)
+            !category.isNullOrBlank() -> plantService.fetchPlantsByCategory(category)
+            else -> plantService.fetchAllPlants()
         }
         val categories = plantService.fetchAllCategories()
         model.addAttribute("plants", plants)
         model.addAttribute("categories", categories)
         model.addAttribute("selectedCategory", category)
+        model.addAttribute("searchTerm", search)
         return "plants/list"
     }
 }

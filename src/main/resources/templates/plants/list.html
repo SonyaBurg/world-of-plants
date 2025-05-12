@@ -21,8 +21,16 @@
 
 <section class="hero">
     <h1>Our Plants Collection</h1>
-<!--    <p>Find your perfect green companion</p>-->
+    <!--    <p>Find your perfect green companion</p>-->
 </section>
+
+<div class="search-container">
+    <form th:action="@{/plants}" method="get" class="search-form">
+        <input type="text" name="search" th:value="${searchTerm}" placeholder="Search plants by name or description..." class="search-input">
+        <button type="submit" class="search-button">Search</button>
+        <a th:if="${searchTerm}" th:href="@{/plants}" class="clear-search">Clear Search</a>
+    </form>
+</div>
 
 <nav class="category-nav">
     <a href="/plants" class="category-item" th:classappend="${selectedCategory == null ? 'active' : ''}">
@@ -49,7 +57,7 @@
                     <form th:action="@{/plants}" method="post">
                         <input type="hidden" name="plantName" th:value="${plant.name}">
                         <input type="number" name="quantity" class="quantity-input" value="1" min="1" max="99">
-                    <button class="btn add-to-cart-btn">Add to Cart</button>
+                        <button class="btn add-to-cart-btn">Add to Cart</button>
                     </form>
                 </div>
 

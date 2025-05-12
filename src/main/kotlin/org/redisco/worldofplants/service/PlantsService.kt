@@ -15,6 +15,7 @@ interface PlantsService {
     fun addPlant(plant: Plant)
     fun updatePlant(originalName: String, updatedPlant: Plant)
     fun deletePlant(name: String)
+    fun searchPlants(searchTerm: String): List<Plant>
 }
 
 @Service
@@ -89,4 +90,8 @@ class PlantsServiceImpl(
         plantsRepository.delete(plant)
     }
 
+    @Transactional(readOnly = true)
+    override fun searchPlants(searchTerm: String): List<Plant> {
+        return plantsRepository.searchPlants(searchTerm).map { it.compose() }
+    }
 }

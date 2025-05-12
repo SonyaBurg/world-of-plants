@@ -44,7 +44,10 @@
                 <button class="quantity-btn">+</button>
             </div>
             <div class="item-price" th:text="${'$' + item.plant.price/100}">$15.00</div>
-            <button class="remove-item">×</button>
+            <form th:action="@{/basket/delete}" method="post" style="display: inline;">
+                <input type="hidden" name="plantName" th:value="${item.plant.name}">
+                <button type="submit" class="remove-item">×</button>
+            </form>
         </div>
     </div>
 
@@ -63,7 +66,7 @@
             <span th:text="${'$' + cart.totalPrice/100}">$0.00</span>
         </div>
         <form th:action="@{/orders}" method="post">
-        <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="checkout-btn">Proceed to Checkout</button>
         </form>
         <a href="/plants" class="continue-shopping">Continue Shopping</a>
     </div>
