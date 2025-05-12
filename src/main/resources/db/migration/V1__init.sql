@@ -4,7 +4,6 @@ create table plants
     name           varchar(100) not null unique,
     description    TEXT         not null,
     category       varchar(100) not null,
-    items_in_stock int          not null,
     price          int          not null,
     picture_link   TEXT         not null
 );
@@ -26,6 +25,8 @@ create table orders
 (
     id          uuid primary key,
     user_id     uuid             not null,
+    foreign key (user_id)
+        references users (id) on delete no action,
     total_price double precision not null,
     address     varchar(255)     not null,
     date        timestamp        not null,
@@ -34,26 +35,16 @@ create table orders
 
 create table ordered_plants
 (
-    id             uuid primary key,
-    name           varchar(100) not null,
-    quantity       int          not null,
-    order_id       uuid         not null,
+    id           uuid primary key,
+    name         varchar(100) not null,
+    quantity     int          not null,
+    order_id     uuid         not null,
     FOREIGN KEY (order_id)
         REFERENCES orders (id) ON DELETE CASCADE,
-    price          int          not null,
-    description    TEXT         not null,
-    category       varchar(100) not null,
-    picture_link   TEXT         not null
-);
-
-create table users_to_orders
-(
-    user_id  uuid,
-    FOREIGN KEY (user_id)
-        REFERENCES users (id),
-    order_id uuid,
-    FOREIGN KEY (order_id)
-        REFERENCES orders (id)
+    price        int          not null,
+    description  TEXT         not null,
+    category     varchar(100) not null,
+    picture_link TEXT         not null
 );
 
 create table basket_items
