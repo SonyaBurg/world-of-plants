@@ -1,14 +1,14 @@
 package org.redisco.worldofplants.service
 
-import org.redisco.worldofplants.dtos.Basket
-import org.redisco.worldofplants.dtos.UpdateUserRequest
-import org.redisco.worldofplants.dtos.User
-import org.redisco.worldofplants.entities.BasketItemEntity
-import org.redisco.worldofplants.entities.Role
-import org.redisco.worldofplants.entities.UserEntity
-import org.redisco.worldofplants.repository.BasketItemRepository
-import org.redisco.worldofplants.repository.PlantsRepository
-import org.redisco.worldofplants.repository.UserRepository
+import org.redisco.worldofplants.controller.dtos.Basket
+import org.redisco.worldofplants.controller.dtos.UpdateUserRequest
+import org.redisco.worldofplants.controller.dtos.User
+import org.redisco.worldofplants.data.entities.BasketItemEntity
+import org.redisco.worldofplants.data.entities.Role
+import org.redisco.worldofplants.data.entities.UserEntity
+import org.redisco.worldofplants.data.repository.BasketItemRepository
+import org.redisco.worldofplants.data.repository.PlantsRepository
+import org.redisco.worldofplants.data.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException

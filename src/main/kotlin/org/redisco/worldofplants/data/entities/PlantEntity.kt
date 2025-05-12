@@ -1,4 +1,4 @@
-package org.redisco.worldofplants.entities
+package org.redisco.worldofplants.data.entities
 
 import jakarta.persistence.*
 import java.util.*
@@ -14,9 +14,6 @@ class PlantEntity(
 
     @Column(name = "description", nullable = false)
     var description: String,
-
-    @Column(name = "items_in_stock", nullable = false)
-    var itemsInStock: Int,
 
     @Column(name = "price", nullable = false)
     var price: Int,

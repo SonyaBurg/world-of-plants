@@ -2,7 +2,7 @@ package org.redisco.worldofplants.controller
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.redisco.worldofplants.dtos.UpdateUserRequest
+import org.redisco.worldofplants.controller.dtos.UpdateUserRequest
 import org.redisco.worldofplants.service.UserService
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler

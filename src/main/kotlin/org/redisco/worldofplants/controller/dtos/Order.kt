@@ -1,6 +1,6 @@
-package org.redisco.worldofplants.dtos
+package org.redisco.worldofplants.controller.dtos
 
-import org.redisco.worldofplants.entities.OrderStatus
+import org.redisco.worldofplants.data.entities.OrderStatus
 
 data class OrderItem(
     val plant: Plant,
@@ -13,9 +13,9 @@ data class Order(
     val address: String,
     val date: String,
     val status: OrderStatus,
-    val orderNumber: Int
+    val orderNumber: Int,
+    val totalPrice: Double
 ) {
     val subTotalPrice = items.sumOf { it.plant.price * it.quantity }
     val shippingPrice = subTotalPrice * 0.05
-    val totalPrice: Double = subTotalPrice + shippingPrice
 }

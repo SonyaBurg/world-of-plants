@@ -1,6 +1,6 @@
-package org.redisco.worldofplants.repository
+package org.redisco.worldofplants.data.repository
 
-import org.redisco.worldofplants.entities.BasketItemEntity
+import org.redisco.worldofplants.data.entities.BasketItemEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query

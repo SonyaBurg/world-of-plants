@@ -1,7 +1,7 @@
-package org.redisco.worldofplants.repository
+package org.redisco.worldofplants.data.repository
 
-import org.redisco.worldofplants.entities.OrderEntity
-import org.redisco.worldofplants.entities.OrderStatus
+import org.redisco.worldofplants.data.entities.OrderEntity
+import org.redisco.worldofplants.data.entities.OrderStatus
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import java.util.UUID
@@ -16,6 +16,7 @@ interface OrdersRepository : JpaRepository<OrderEntity, UUID> {
     @Query("SELECT COUNT(o) FROM OrderEntity o WHERE o.status = :status")
     fun countAllByStatus(status: OrderStatus): Int
 
+    @Suppress("JpaQlInspection")
     @Query(
         """
     SELECT EXTRACT(YEAR FROM o.date) as year, EXTRACT(MONTH FROM o.date) as month, SUM(o.totalPrice) as revenue

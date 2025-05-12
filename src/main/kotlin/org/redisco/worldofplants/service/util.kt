@@ -1,16 +1,16 @@
 package org.redisco.worldofplants.service
 
-import org.redisco.worldofplants.dtos.BasketItem
-import org.redisco.worldofplants.dtos.Order
-import org.redisco.worldofplants.dtos.OrderItem
-import org.redisco.worldofplants.dtos.OrderStatusStatistics
-import org.redisco.worldofplants.dtos.Plant
-import org.redisco.worldofplants.dtos.User
-import org.redisco.worldofplants.entities.BasketItemEntity
-import org.redisco.worldofplants.entities.OrderEntity
-import org.redisco.worldofplants.entities.OrderedPlantEntity
-import org.redisco.worldofplants.entities.PlantEntity
-import org.redisco.worldofplants.entities.UserEntity
+import org.redisco.worldofplants.controller.dtos.BasketItem
+import org.redisco.worldofplants.controller.dtos.Order
+import org.redisco.worldofplants.controller.dtos.OrderItem
+import org.redisco.worldofplants.controller.dtos.OrderStatusStatistics
+import org.redisco.worldofplants.controller.dtos.Plant
+import org.redisco.worldofplants.controller.dtos.User
+import org.redisco.worldofplants.data.entities.BasketItemEntity
+import org.redisco.worldofplants.data.entities.OrderEntity
+import org.redisco.worldofplants.data.entities.OrderedPlantEntity
+import org.redisco.worldofplants.data.entities.PlantEntity
+import org.redisco.worldofplants.data.entities.UserEntity
 import java.time.format.DateTimeFormatter
 
 fun OrderEntity.compose(): Order {
@@ -22,6 +22,7 @@ fun OrderEntity.compose(): Order {
         status = status,
         orderNumber = orderNumber,
         user = user.compose(),
+        totalPrice = totalPrice / 100
     )
 }
 
